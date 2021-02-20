@@ -25,7 +25,7 @@ public:
 	}
 	void SendToGPU();
 	void Render();
-	void set_shaderProgramId(unsigned int id) { _shaderProgramId = id; }
+	void SetShaderProgramId(unsigned int id) { _shaderProgramId = id; }
 };
 
 #endif // !OPENGL_GRAPHICS_OBJECT
