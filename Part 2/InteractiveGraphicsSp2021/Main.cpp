@@ -4,6 +4,7 @@
 #include <glad/glad.h> 
 #include <GLFW/glfw3.h>
 #include <iostream>
+#include "GraphicsStructures.h" 
 
 void OnWindowResize_Callback(GLFWwindow* window, int width, int height)
 {
@@ -71,19 +72,6 @@ bool CreateShaderProgram(GLuint& shaderProgram)
    glDeleteShader(fragmentShader);
    return true;
 }
-
-struct Vector3D {
-   GLfloat x, y, z;
-};
-
-struct RGB {
-   GLfloat red, green, blue;
-};
-
-struct Vertex {
-   Vector3D position;
-   RGB color;
-};
 
 void SetUpScene(Vertex vertexData[])
 {
