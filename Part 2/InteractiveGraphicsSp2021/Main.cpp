@@ -204,52 +204,82 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
    //x GLuint vaoId, vboId;
    //x SendSceneDataToGPU(vaoId, vboId, triangleVertexData, sizeof(triangleVertexData));
 
+   // *** Create Rectangle ***
    OpenGLGraphicsObject rectangle;
    rectangle.SetShaderProgramId(shaderProgram); // Your setter may be different
    Vertex* rectangleVertices = new Vertex[6];
-   rectangleVertices[0].position.x = -0.5f;
-   rectangleVertices[0].position.y = 0.5f;
+   rectangleVertices[0].position.x = 0.1f;
+   rectangleVertices[0].position.y = 0.0f;
    rectangleVertices[0].position.z = 0.0f;
-   rectangleVertices[0].color.red = 1.0f;
-   rectangleVertices[0].color.green = 0.0f;
+   rectangleVertices[0].color.red = 0.0f;
+   rectangleVertices[0].color.green = 1.0f;
    rectangleVertices[0].color.blue = 0.0f;
 
-   rectangleVertices[1].position.x = -0.5f;
-   rectangleVertices[1].position.y = -0.5f;
+   rectangleVertices[1].position.x = -0.1f;
+   rectangleVertices[1].position.y = 0.0f;
    rectangleVertices[1].position.z = 0.0f;
-   rectangleVertices[1].color.red = 1.0f;
-   rectangleVertices[1].color.green = 0.0f;
+   rectangleVertices[1].color.red = 0.0f;
+   rectangleVertices[1].color.green = 2.0f;
    rectangleVertices[1].color.blue = 0.0f;
 
-   rectangleVertices[2].position.x = 0.5f;
+   rectangleVertices[2].position.x = -0.1f;
    rectangleVertices[2].position.y = -0.5f;
    rectangleVertices[2].position.z = 0.0f;
-   rectangleVertices[2].color.red = 1.0f;
-   rectangleVertices[2].color.green = 0.0f;
+   rectangleVertices[2].color.red = 0.0f;
+   rectangleVertices[2].color.green = 1.0f;
    rectangleVertices[2].color.blue = 0.0f;
 
-   rectangleVertices[3].position.x = 0.5f;
+   rectangleVertices[3].position.x = -0.1f;
    rectangleVertices[3].position.y = -0.5f;
    rectangleVertices[3].position.z = 0.0f;
-   rectangleVertices[3].color.red = 0.0f;
-   rectangleVertices[3].color.green = 0.0f;
-   rectangleVertices[3].color.blue = 1.0f;
+   rectangleVertices[3].color.red = 1.0f;
+   rectangleVertices[3].color.green = 0.7f;
+   rectangleVertices[3].color.blue = 0.7f;
 
-   rectangleVertices[4].position.x = 0.5f;
-   rectangleVertices[4].position.y = 0.5f;
+   rectangleVertices[4].position.x = 0.1f;
+   rectangleVertices[4].position.y = -0.5f;
    rectangleVertices[4].position.z = 0.0f;
-   rectangleVertices[4].color.red = 0.0f;
-   rectangleVertices[4].color.green = 0.0f;
-   rectangleVertices[4].color.blue = 1.0f;
+   rectangleVertices[4].color.red = 1.0f;
+   rectangleVertices[4].color.green = 0.7f;
+   rectangleVertices[4].color.blue = 0.7f;
 
-   rectangleVertices[5].position.x = -0.5f;
-   rectangleVertices[5].position.y = 0.5f;
+   rectangleVertices[5].position.x = 0.1f;
+   rectangleVertices[5].position.y = 0.0f;
    rectangleVertices[5].position.z = 0.0f;
-   rectangleVertices[5].color.red = 0.0f;
-   rectangleVertices[5].color.green = 0.0f;
-   rectangleVertices[5].color.blue = 1.0f;
+   rectangleVertices[5].color.red = 1.0f;
+   rectangleVertices[5].color.green = 0.7f;
+   rectangleVertices[5].color.blue = 0.7f;
+
    rectangle.SetObjectData(rectangleVertices, 6);
    rectangle.SendToGPU();
+
+   // *** Create Triangle ***
+   OpenGLGraphicsObject triangle;
+   triangle.SetShaderProgramId(shaderProgram); // Your setter may be different
+   Vertex* triangleVertices = new Vertex[3];
+   triangleVertices[0].position.x = 0.0f;
+   triangleVertices[0].position.y = 0.3f;
+   triangleVertices[0].position.z = 0.0f;
+   triangleVertices[0].color.red = 1.0f;
+   triangleVertices[0].color.green = 1.0f;
+   triangleVertices[0].color.blue = 0.0f;
+
+   triangleVertices[1].position.x = -0.15f;
+   triangleVertices[1].position.y = 0.0f;
+   triangleVertices[1].position.z = 0.0f;
+   triangleVertices[1].color.red = 1.0f;
+   triangleVertices[1].color.green = 1.0f;
+   triangleVertices[1].color.blue = 0.0f;
+
+   triangleVertices[2].position.x = 0.15f;
+   triangleVertices[2].position.y = 0.0f;
+   triangleVertices[2].position.z = 0.0f;
+   triangleVertices[2].color.red = 1.0f;
+   triangleVertices[2].color.green = 1.0f;
+   triangleVertices[2].color.blue = 0.0f;
+
+   triangle.SetObjectData(triangleVertices, 3);
+   triangle.SendToGPU();
 
    //glfwMaximizeWindow(window);
    glfwShowWindow(window);
@@ -259,7 +289,10 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
       glClearColor(0.0f, 0.0f, 0.0f, 1.0f);
       glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT | GL_STENCIL_BUFFER_BIT);
       //x RenderScene(vaoId, vboId, shaderProgram);
+      
       rectangle.Render();
+      triangle.Render();
+      
 
       glfwSwapBuffers(window);
       glfwPollEvents();
