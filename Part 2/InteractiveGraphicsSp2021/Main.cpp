@@ -5,6 +5,7 @@
 #include <GLFW/glfw3.h>
 #include <iostream>
 #include "GraphicsStructures.h" 
+#include "OpenGLGraphicsObject.h"
 
 void OnWindowResize_Callback(GLFWwindow* window, int width, int height)
 {
@@ -197,11 +198,38 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
       return -1;
    }
 
-   Vertex triangleVertexData[3];
-   SetUpScene(triangleVertexData);
+   //x Vertex triangleVertexData[3];
+   //x SetUpScene(triangleVertexData);
 
-   GLuint vaoId, vboId;
-   SendSceneDataToGPU(vaoId, vboId, triangleVertexData, sizeof(triangleVertexData));
+   //x GLuint vaoId, vboId;
+   //x SendSceneDataToGPU(vaoId, vboId, triangleVertexData, sizeof(triangleVertexData));
+
+   OpenGLGraphicsObject triangle;
+   triangle.SetShaderProgramId(shaderProgram); // Your setter may be different
+   Vertex* triangleVertices = new Vertex[3];
+   triangleVertices[0].position.x = 0.0f;
+   triangleVertices[0].position.y = 0.5f;
+   triangleVertices[0].position.z = 0.0f;
+   triangleVertices[0].color.red = 0.0f;
+   triangleVertices[0].color.green = 0.0f;
+   triangleVertices[0].color.blue = 1.0f;
+
+   triangleVertices[1].position.x = -0.5f;
+   triangleVertices[1].position.y = -0.5f;
+   triangleVertices[1].position.z = 0.0f;
+   triangleVertices[1].color.red = 0.0f;
+   triangleVertices[1].color.green = 0.0f;
+   triangleVertices[1].color.blue = 1.0f;
+
+   triangleVertices[2].position.x = 0.5f;
+   triangleVertices[2].position.y = -0.5f;
+   triangleVertices[2].position.z = 0.0f;
+   triangleVertices[2].color.red = 0.0f;
+   triangleVertices[2].color.green = 0.0f;
+   triangleVertices[2].color.blue = 1.0f;
+   triangle.SetObjectData(triangleVertices, 3);
+   triangle.SendToGPU();
+
 
    //glfwMaximizeWindow(window);
    glfwShowWindow(window);
@@ -210,13 +238,14 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
 
       glClearColor(0.0f, 0.0f, 0.0f, 1.0f);
       glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT | GL_STENCIL_BUFFER_BIT);
-      RenderScene(vaoId, vboId, shaderProgram);
+      //x RenderScene(vaoId, vboId, shaderProgram);
+      triangle.Render();
 
       glfwSwapBuffers(window);
       glfwPollEvents();
    }
 
-   glDeleteVertexArrays(1, &vaoId);
+   //x glDeleteVertexArrays(1, &vaoId);
    glfwTerminate();
    return 0;
 }
